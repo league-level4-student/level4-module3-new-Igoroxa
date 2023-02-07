@@ -31,7 +31,16 @@ public class LinkedListDemo {
          * String nodes.
          * 
          */
+CustomLinkList<Integer> links = new CustomLinkList<Integer>();
+links.add(1);
+links.add(2);
 
+links.getHead();
+Node<Integer> node = new Node<Integer>(5);
+
+links.equals(node);
+System.out.println(node);
+    	
     }
 
 }
