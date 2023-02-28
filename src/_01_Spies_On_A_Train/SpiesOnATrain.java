@@ -33,7 +33,7 @@ public class SpiesOnATrain {
 			evid = current.questionPassenger();
 			System.out.println(evid);
 			System.out.println(clues[i]);
-			String testimony = evid.split(regex)
+	
 			if (evid.contains(clues[i])) {
 				count++;
 				System.out.println(count);
