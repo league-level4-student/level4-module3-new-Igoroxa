@@ -117,6 +117,7 @@ public class RainbowZombieCongaLine {
 	 * color to the end of the line.
 	 */
 	public void rainbowBrains(Zombie dancer) {
+		
 		Node first = congaLine.getHead();
 		
 		Node currentHead = new Node(dancer);
