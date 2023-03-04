@@ -33,14 +33,14 @@ public class RainbowZombieCongaLine {
 
 	// Make the passed in zombie the first Zombie in the conga line!
 	public void engine(Zombie dancer) {
-		Node first = new Node(dancer);
+		Node<Zombie> first = new Node<Zombie>(dancer);
 		congaLine.setHead(first);
 
 	}
 
 	// Make the passed in zombie the last Zombie in the conga line!
 	public void caboose(Zombie dancer) {
-		Node last = new Node(dancer);
+		Node<Zombie> last = new Node<Zombie>(dancer);
 		congaLine.setTail(last);
 	}
 
@@ -51,6 +51,7 @@ public class RainbowZombieCongaLine {
 		for (int i = 0; i < position; i++) {
 			middle.getNext();
 		}
+		middle.setValue(dancer);
 
 	}
 
@@ -94,9 +95,9 @@ public class RainbowZombieCongaLine {
 		Zombie inputF = new Zombie(color);
 		Zombie inputS = new Zombie(color);
 
-		Node<Zombie> currentHead = new Node(inputF);
+		Node<Zombie> currentHead = new Node<Zombie>(inputF);
 
-		Node oldhead = congaLine.getHead();
+		Node<Zombie> oldhead = congaLine.getHead();
 		currentHead.setNext(oldhead);
 
 		Node<Zombie> jumper = congaLine.getHead();
@@ -105,9 +106,9 @@ public class RainbowZombieCongaLine {
 		}
 		jumper.setValue(dancer);
 
-		Node<Zombie> currentTail = new Node(inputS);
+		Node<Zombie> currentTail = new Node<Zombie>(inputS);
 
-		Node oldtail = congaLine.getTail();
+		Node<Zombie> oldtail = congaLine.getTail();
 		currentTail.setPrev(oldtail);
 
 	}
@@ -117,43 +118,33 @@ public class RainbowZombieCongaLine {
 	 * color to the end of the line.
 	 */
 	public void rainbowBrains(Zombie dancer) {
-		
-		Node first = congaLine.getHead();
-		
-		Node currentHead = new Node(dancer);
-		currentHead.setNext(first);
 
-		
-		Zombie red = new Zombie(ZombieHatColor.R);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie orange = new Zombie(ZombieHatColor.O);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie yellow = new Zombie(ZombieHatColor.Y);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie green = new Zombie(ZombieHatColor.G);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie blue = new Zombie(ZombieHatColor.B);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie indigo = new Zombie(ZombieHatColor.I);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
-		Zombie violet = new Zombie(ZombieHatColor.V);
-		Node<Zombie> currentTail = new Node(red);
-		Node oldtail = congaLine.getTail();
-		currentTail.setPrev(oldtail);
+		Node<Zombie> first = congaLine.getHead();
 
-		
+		Node<Zombie> current = new Node<Zombie>(dancer);
+		current.setNext(first);
+		congaLine.setHead(current);
+
+		if (congaLine.getTail() == null) {
+			for (int i = 0; i < congaLine.size(); i++) {
+				Node<Zombie> temp = current.getNext();
+				if (temp != null) {
+				current = current.getNext();
+				} else {
+					congaLine.setTail(current);
+
+				}
+			}
+		}
+
+		for (ZombieHatColor z : ZombieHatColor.values()) {
+			Zombie zomb = new Zombie(z);
+			Node<Zombie> currentTail = new Node<Zombie>(zomb);
+			Node<Zombie> tail = congaLine.getTail();
+			tail.setNext(currentTail);
+			congaLine.setTail(currentTail);
+		}
+
 	}
 
 	public LinkedList<Zombie> getCongaLine() {
