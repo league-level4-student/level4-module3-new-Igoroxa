@@ -1,6 +1,9 @@
 package _04_Morse_Code;
 
+import java.lang.reflect.Array;
+
 import _03_Intro_to_Binary_Trees.BinaryTree;
+import _03_Intro_to_Binary_Trees.Node;
 
 public class MorseDecoder {
 
@@ -10,7 +13,7 @@ public class MorseDecoder {
 
         MorseDecoder md = new MorseDecoder();
         md.initialize();
-        md.decode();
+        md.decode();  
 
     }
 
@@ -60,11 +63,21 @@ public class MorseDecoder {
      * 2.) Then use the binary tree and the scanner class to create a morse code
      * translator. The user should be able to type multiple letters in morse
      * code on a single line and have it repeated back to them, decoded into the
-     * english alphabet.
+     * English alphabet.
      * 
      */
     void decode() {
         String morseCode = "-.-- --- ..- .- .-. . .- -- .- --.. .. -. --.";
+        String[] codes = morseCode.split(" ");
+        String decodedMessage = new String();
+        for (int j = 0; j < codes.length; j++) {
+        	MorseCode mcs = new MorseCode(codes[j]);
+        Node<MorseCode> n = mcTree.search(mcs);
+        MorseCode mc = n.getValue();
+        decodedMessage+= mc.getDecoded();
+		}
+        System.out.println(decodedMessage);
+    }
     }
 
-}
+

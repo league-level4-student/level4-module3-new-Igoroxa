@@ -62,9 +62,15 @@ public class RainbowZombieCongaLine {
 	public void everyoneOut(Zombie dancer) {
 		ZombieHatColor color = dancer.getZombieHatColor();
 		Node<Zombie> first = congaLine.getHead();
+		int pos = 0;
 		while (first != null) {
+			first = first.getNext();
+			pos++;
 			if (color == first.getValue().getZombieHatColor()) {
-				first = first.getNext();
+				
+//				delete.getPrev().setNext(delete.getNext());
+//				delete.getNext().setPrev(delete.getPrev());
+				congaLine.remove(pos);
 			}
 		}
 	}
@@ -129,7 +135,7 @@ public class RainbowZombieCongaLine {
 			for (int i = 0; i < congaLine.size(); i++) {
 				Node<Zombie> temp = current.getNext();
 				if (temp != null) {
-				current = current.getNext();
+					current = current.getNext();
 				} else {
 					congaLine.setTail(current);
 
